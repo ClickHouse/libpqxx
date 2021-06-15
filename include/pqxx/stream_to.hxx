@@ -353,11 +353,11 @@ private:
       else
       {
         // This field needs to be converted to a string, and after that,
-        // escaping as well.
+        // escaped as well.
         m_field_buf.resize(budget);
         auto const data{std::data(m_field_buf)};
         escape_field_to_buffer(
-          traits::to_buf(data, data + std::size(m_field_buf), f));  // NOLINT
+          traits::to_buf(data, data + std::size(m_field_buf), f));
       }
     }
   }
