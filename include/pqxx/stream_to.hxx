@@ -357,7 +357,7 @@ private:
         m_field_buf.resize(budget);
         auto const data{std::data(m_field_buf)};
         escape_field_to_buffer(
-          traits::to_buf(data, data + std::size(m_field_buf), f));  // NOLINT
+          traits::to_buf(data, data + std::size(m_field_buf), f));
       }
     }
   }
