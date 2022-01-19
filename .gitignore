@@ -17,8 +17,6 @@ doc/html/Reference/*.png
 doc/html/Reference/*.map
 doc/html/Reference/*.md5
 doc/reference-stamp
-include/pqxx/config-*-*.h
-include/pqxx/config.h
 include/pqxx/stamp-h1
 libpqxx.pc
 libpqxx-*.tar.gz
