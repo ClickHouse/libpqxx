@@ -861,6 +861,10 @@ pqxx::connection::read_copy_line()
   }
 }
 
+void pqxx::connection::reset()
+{
+  PQreset(m_conn);
+}
 
 void pqxx::connection::write_copy_line(std::string_view line)
 {
