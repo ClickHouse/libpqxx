@@ -1086,6 +1086,10 @@ pqxx::connection::read_copy_line(sl loc)
   }
 }
 
+void pqxx::connection::reset()
+{
+  PQreset(real_conn(m_conn));
+}
 
 void pqxx::connection::write_copy_line(std::string_view line, sl loc)
 {
