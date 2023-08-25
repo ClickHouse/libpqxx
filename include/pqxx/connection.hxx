@@ -207,6 +207,8 @@ public:
    */
   connection(connection &&rhs);
 
+  void reset();
+
 #if defined(PQXX_HAVE_CONCEPTS)
   /// Connect to a database, passing options as a range of key/value pairs.
   /** @warning Experimental.  Requires C++20 "concepts" support.  Define
