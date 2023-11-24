@@ -196,8 +196,18 @@ pqxx::result pqxx::connection::make_result(
     else
       throw broken_connection{"Lost connection to the database server."};
   }
-  auto const r{pqxx::internal::gate::result_creation::create(
-    pgr, query, internal::enc_group(encoding_id()))};
+  internal::encoding_group enc;
+  try
+  {
+    enc = internal::enc_group(encoding_id());
+  }
+  catch (std::exception const &)
+  {
+    // Don't let the PGresult leak. Useful in network partition.
+    internal::clear_result(pgr);
+    throw;
+  }
+  auto const r{pqxx::internal::gate::result_creation::create(pgr, query, enc)};
   pqxx::internal::gate::result_creation{r}.check_status(desc);
   return r;
 }
