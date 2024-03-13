@@ -439,6 +439,14 @@ template<typename T>
     for (; i < std::size(text) and isdigit(data[i]); ++i)
       result = absorb_digit_negative(result, digit_to_number(data[i]));
   }
+  else if (initial == 't')
+  {
+    result = 1;
+  }
+  else if (initial == 'f')
+  {
+    result = 0;
+  }
   else
   {
     throw pqxx::conversion_error{
