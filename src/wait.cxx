@@ -115,7 +115,11 @@ void pqxx::internal::wait_fd(
   FD_ZERO(&except_fds);
   set_fdbit(except_fds, fd);
 
+#if defined(OS_DARWIN)
+  timeval tv = {seconds, static_cast<__darwin_suseconds_t>(microseconds)};
+#else
   timeval tv = {seconds, microseconds};
+#endif
   select(fd + 1, &read_fds, &write_fds, &except_fds, &tv);
   // TODO: Check for errors.
 #endif
@@ -130,7 +134,11 @@ void PQXX_COLD pqxx::internal::wait_for(unsigned int microseconds)
   // MinGW still does not have a functioning <thread> header.  Work around this
   // using select().
   // Not worth optimising for though -- they'll have to fix it at some point.
+#if defined(OS_DARWIN)
+  timeval tv{microseconds / 1'000'000u, static_cast<__darwin_suseconds_t>(microseconds % 1'000'000u)};
+#else
   timeval tv{microseconds / 1'000'000u, microseconds % 1'000'000u};
+#endif
   select(0, nullptr, nullptr, nullptr, &tv);
 #endif
 }
