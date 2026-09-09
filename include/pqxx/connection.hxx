@@ -372,6 +372,8 @@ public:
    */
   connection(connection &&rhs, sl = sl::current());
 
+  void reset();
+
   ~connection()
   {
     try

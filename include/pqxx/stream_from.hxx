@@ -265,6 +265,8 @@ public:
   /** @warning Do not use this unless you really know what you're doing. */
   raw_line get_raw_line(sl);
 
+  void close();
+
 private:
   // TODO: Clean up this signature once we cull the deprecated constructors.
   /// @deprecated
@@ -293,8 +295,6 @@ private:
   std::vector<std::string_view> m_fields;
 
   bool m_finished = false;
-
-  void close();
 
   template<typename Tuple, std::size_t index>
   void extract_value(Tuple &, sl loc) const;
